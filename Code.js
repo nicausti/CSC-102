@@ -1,4 +1,19 @@
 //Creating countdown function from 10 to 0 and then Blastoff!
+//Modified version of countdown timer. Optimized to reduce space.
+function countDownV2(){
+    var count = 10;
+    for(var i = 1; i <= 10; i++) { 
+    setTimeout(function(){
+    document.getElementById("countDownTimer").innerHTML = count;
+    count--;}, 1000* i);
+       
+} 
+setTimeout(function(){
+document.getElementById("countDownTimer").innerHTML = "Blastoff!";
+count--;}, 11000);
+}
+
+//Old countdown timer
 function countDown () {
     var count = 10;
     document.getElementById("countDownTimer").innerHTML = count;
@@ -77,4 +92,18 @@ else if(die1 == die2 && die1%2 == 0){
 document.getElementById("crapsResults").innerHTML = "Doubles! You Win!";}
 
 else document.getElementById("crapsResults").innerHTML = "Push. Please Try Again.";
+}
+
+//Sandbox for creating loop timer
+function runSandbox(){
+    var count = 10;
+    for(var i = 1; i <= 10; i++) { 
+    setTimeout(function(){
+    document.getElementById("sandboxDisplay").innerHTML = count;
+    count--;}, 1000* i);
+       
+} 
+setTimeout(function(){
+document.getElementById("sandboxDisplay").innerHTML = "Blastoff!";
+count--;}, 11000);
 }
