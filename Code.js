@@ -1,13 +1,36 @@
 //creating the start button enable/disable
-function start(){
+function start() {
     document.getElementById("startButton").disabled = true;
     document.getElementById("stopButton").disabled = false;
 }
 //creating the stop button enable/disable
-function stop(){
+function stop() {
     document.getElementById("stopButton").disabled = true;
     document.getElementById("startButton").disabled = false;
 }
+//creating the function to play a song
+function playMusic() {
+    mySound = new sound("Blast off to Nowhere.Mp3");
+    mySound.play();
+}
+//linking the sound source and setting attributes
+function sound(src){
+        this.sound = document.createElement("audio");
+        this.sound.src = src;
+        this.sound.setAttribute("preload", "audio");
+        this.sound.setAttribute("controls", "none");
+        this.sound.style.display = "none";
+        document.body.appendChild(this.sound);
+    
+
+        this.play = function () {
+            this.sound.play();
+        };
+        this.stop = function () {
+            this.sound.pause();
+        };
+    
+    }
 
 //Creating the function to play Craps
 function playCraps() {
