@@ -1,72 +1,12 @@
-//Creating countdown function from 10 to 0 and then Blastoff!
-function countDown() {
-    var count = 10;
-    document.getElementById("countDownTimer").innerHTML = count;
-    count = count - 1;
-    //Going to 9
-    setTimeout(function () {
-        document.getElementById("countDownTimer").innerHTML = count;
-        count = count - 1;
-    }, 1000);
-    //Then to 8
-    setTimeout(function () {
-        document.getElementById("countDownTimer").innerHTML = count;
-        count = count - 1;
-    }, 2000);
-    //Then to 7
-    setTimeout(function () {
-        document.getElementById("countDownTimer").innerHTML = count;
-        count = count - 1;
-    }, 3000);
-    //Then to 6
-    setTimeout(function () {
-        document.getElementById("countDownTimer").innerHTML = count;
-        count = count - 1;
-    }, 4000);
-    //To 5
-    setTimeout(function () {
-        document.getElementById("countDownTimer").innerHTML = count;
-        count = count - 1;
-    }, 5000);
-    //To 4
-    setTimeout(function () {
-        document.getElementById("countDownTimer").innerHTML = count;
-        count = count - 1;
-    }, 6000);
-    //To 3
-    setTimeout(function () {
-        document.getElementById("countDownTimer").innerHTML = count;
-        count = count - 1;
-    }, 7000);
-    //To 2
-    setTimeout(function () {
-        document.getElementById("countDownTimer").innerHTML = count;
-        count = count - 1;
-    }, 8000);
-    //To 1
-    setTimeout(function () {
-        document.getElementById("countDownTimer").innerHTML = count;
-        count = count - 1;
-    }, 9000);
-    //Blastoff!!
-    setTimeout(function () {
-        document.getElementById("countDownTimer").innerHTML = "Blastoff!!";
-        count = count - 1;
-    }, 10000);
+//creating the start button enable/disable
+function start(){
+    document.getElementById("startButton").disabled = true;
+    document.getElementById("stopButton").disabled = false;
 }
-function countDownTimerV2() {
-    var count = 10;
-    for (var i = 1; i <= 10; i++) {
-        setTimeout(function () {
-            document.getElementById("countDownTimer").innerHTML = count;
-            count--;
-        }, 1000 * i);
-
-    }
-    setTimeout(function () {
-        document.getElementById("countDownTimer").innerHTML = "Blastoff!";
-        count--;
-    }, 11000);
+//creating the stop button enable/disable
+function stop(){
+    document.getElementById("stopButton").disabled = true;
+    document.getElementById("startButton").disabled = false;
 }
 
 //Creating the function to play Craps
