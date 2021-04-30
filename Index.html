@@ -11,6 +11,7 @@
 
 <head>
     <script src="Code.js"></script>
+    <script src="dataLoader-1.js"></script>
     <link href="Style.css" rel="stylesheet" type="text/css" />
     <!--This is the head-->
     <title>
@@ -19,6 +20,51 @@
 </head>
 
 <body>
+    <script>
+        var theTime = new Date();
+        var tempTime = new Date();
+        var time_interval = 5000;
+        var last_iteration = 0;
+        var running = true;
+        var index = 0;
+        var timer;
+
+        var data = getData();
+
+        function updateDisplay() {
+            theTime = new Date();
+
+            var timeRead = data[index].time_seconds
+            if (timeRead >= 10) {
+                document.getElementById("data").rows["seconds"].innerHTML = dataRow("Time Elapsed", data[index].time_seconds, "seconds");
+                document.getElementById("data").rows["latitude"].innerHTML = dataRow("Latitude", data[index].latitude, " ");
+                document.getElementById("data").rows["longitude"].innerHTML = dataRow("Longitude", data[index].longitude, " ");
+                document.getElementById("data").rows["gps_altitude"].innerHTML = dataRow("GPS Altitude", data[index].gps_altitude, " ");
+                document.getElementById("data").rows["bmpSensor_altitude"].innerHTML = dataRow("BMP Sensor Altitude", data[index].bmpSensor_altitude, " ");
+                document.getElementById("data").rows["bmpSensor_pressure"].innerHTML = dataRow("BMP Sensor Pressure", data[index].bmpSensor_pressure, " ");
+                document.getElementById("data").rows["bmpSensor_temp"].innerHTML = dataRow("BMP Sensor Temp", data[index].bmpSensor_temp, " ");
+                document.getElementById("data").rows["digSensor_temp"].innerHTML = dataRow("Digital Sensor Temp", data[index].digSensor_temp, " ");
+                document.getElementById("data").rows["cssSensor_temp"].innerHTML = dataRow("CSS Sensor Temp", data[index].cssSensor_temp, " ");
+                document.getElementById("data").rows["cssSensor_eCo2"].innerHTML = dataRow("CSS Sensor eCo2", data[index].cssSensor_eCo2, " ");
+                document.getElementById("data").rows["cssSensor_TVOC"].innerHTML = dataRow("CSS Sensor TVOC", data[index].cssSensor_TVOC, " ");
+                document.getElementById("data").rows["uv"].innerHTML = dataRow("UV", data[index].uv, " ");
+                document.getElementById("data").rows["accelX"].innerHTML = dataRow("Accel X", data[index].accelX, " ");
+                document.getElementById("data").rows["accelY"].innerHTML = dataRow("Accel Y", data[index].accelY, " ");
+                document.getElementById("data").rows["accelZ"].innerHTML = dataRow("Accel Z", data[index].accelZ, " ");
+                document.getElementById("data").rows["magneticX"].innerHTML = dataRow("Magnetic X", data[index].magneticX, " ");
+                document.getElementById("data").rows["magneticY"].innerHTML = dataRow("Magnetic Y", data[index].magneticY, " ");
+                document.getElementById("data").rows["magneticZ"].innerHTML = dataRow("Magnetic Z", data[index].magneticZ, " ");
+                document.getElementById("data").rows["gyroX"].innerHTML = dataRow("Gyro X", data[index].gyroX, " ");
+                document.getElementById("data").rows["gyroY"].innerHTML = dataRow("Gyro Y", data[index].gyroY, " ");
+                document.getElementById("data").rows["gyroZ"].innerHTML = dataRow("Gyro Z", data[index].gyroZ, " ");
+
+            } if (index < 500) {
+                index++;
+            } else index = 0;
+        }
+
+    </script>
+
     <table>
         <td>
             <!--This is the UAT Space logo-->
@@ -32,14 +78,17 @@
     <!--This is the start and stop button-->
     <button class="button" id="startButton" onclick="start();">Start</button>
     <button class="button" id="stopButton" onclick="stop();">Stop</button>
-    <br><!--This is the button to play the song-->
+    <br>
+    <!--This is the button to play the song-->
     <button class="lgbutton" onclick="playMusic();">Play Music!</button>
     <br>
-    <table><!--This is the specs for the table size and class-->
-        <table border= "2" id="data" width="70%" class=mainTable>
+    <table>
+        <!--This is the specs for the table size and class-->
+        <table border="2" id="data" width="70%" class=mainTable>
             <col style="width: 35%;">
             <col style="width: 35%;">
-            <thead><!--This is the table heading-->
+            <thead>
+                <!--This is the table heading-->
                 <tr style="font-family:monospace;"></tr>
                 <th>
                     Data Type
@@ -48,30 +97,31 @@
                     Reading
                 </th>
             </thead>
-            <tbody><!--This is the table data-->
-                <tr id="seconds"><td>Time Elapsed</td><td>15 Seconds</td></tr>
-                <tr id="latitude"><td>Latitude</td><td>0</td></tr>
-                <tr id="longitude"><td>Longitude</td><td>0</td></tr>
-                <tr id="gpsAltitude"><td>GPS Altitude</td><td>0</td></tr>
-                <tr id="bmpAltitude"><td>BMP Sensor Altitude</td><td>30383.04</td></tr>
-                <tr id="bmpPressure"><td>BMP Sensor Pressure</td><td>2.34</td></tr>
-                <tr id="bmpTemp"><td>BMP Sensor Temperature</td><td>0</td></tr>
-                <tr id="digitalTemp"><td>Digital Sensor Temperature</td><td>24.12</td></tr>
-                <tr id="cssTemp"><td>CSS Sensor Temperature</td><td>25</td></tr>
-                <tr id="cssEco2"><td>CSS Sensor eCO2</td><td>400</td></tr>
-                <tr id="cssTvoc"><td>CSS Senser TVOC</td><td>0</td></tr>
-                <tr id="uv"><td>UV</td><td>0</td></tr>
-                <tr id="accelX"><td>Accel X</td><td>-0.87</td></tr>
-                <tr id="accelY"><td>Accel Y</td><td>-0.02</td></tr>
-                <tr id="accelZ"><td>Accel Z</td><td>9.61</td></tr>
-                <tr id="magneticX"><td>Magnetic X</td><td>0.13</td></tr>
-                <tr id="magneticY"><td>Magnetic Y</td><td>0.57</td></tr>
-                <tr id="magneticZ"><td>Magnetic Z</td><td>-0.24</td></tr>
-                <tr id="gyroX"><td>Gyro X</td><td>4.66</td></tr>
-                <tr id="gyroY"><td>Gyro Y</td><td>0.01</td></tr>
-                <tr id="gyroZ"><td>Gyro Z</td><td>-0.4</td></tr>
+            <tbody>
+                <!--This is the table data-->
+                <tr id="seconds"></tr>
+                <tr id="latitude"></tr>
+                <tr id="longitude"></tr>
+                <tr id="gps_altitude"></tr>
+                <tr id="bmpSensor_altitude"></tr>
+                <tr id="bmpSensor_pressure"></tr>
+                <tr id="bmpSensor_temp"></tr>
+                <tr id="digSensor_temp"></tr>
+                <tr id="cssSensor_temp"></tr>
+                <tr id="cssSensor_eCo2"></tr>
+                <tr id="cssSensor_TVOC"></tr>
+                <tr id="uv"></tr>
+                <tr id="accelX"></tr>
+                <tr id="accelY"></tr>
+                <tr id="accelZ"></tr>
+                <tr id="magneticX"></tr>
+                <tr id="magneticY"></tr>
+                <tr id="magneticZ"></tr>
+                <tr id="gyroX"></tr>
+                <tr id="gyroY"></tr>
+                <tr id="gyroZ"></tr>
             </tbody>
-    </table>
+        </table>
     </table>
     <!--Displays results-->
     <h3 id="crapsResults">Results of the craps round</h3>
